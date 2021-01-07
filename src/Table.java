@@ -1,13 +1,12 @@
 /* **********************************************************
  * Programmer:	Amy Mann
- * Class:		CS40S
+ * Class:       CS40S
  * 
  * Assignment:	01 2D Array Exercise
  *
  * Description:	describe the class you are creating
  *
- * *************************************************************
- */
+ * ************************************************************/
  
  // import files here as needed
  
@@ -21,7 +20,7 @@
  	// ********** instance variable **********
  	
             int rows = 0;       // number of rows
-            int colomns = 0;    // number of colomns
+            int columns = 0;    // number of columns
             
  	// ********** constructors ***********
  	
@@ -31,7 +30,7 @@
             * ****************************************/
                 public Table(){
                     this.rows = 0;        // sets rows to zero
-                    this.colomns = 0;     // sets colomns to zero
+                    this.columns = 0;     // sets columns to zero
                 }  // end default constructor
             
             /*****************************************
@@ -40,21 +39,52 @@
             * Interface:
             * 
             * @param        rows : int, number of rows
-            * @param        colomns : int, number of colomns
+            * @param        columns : int, number of columns
             * 
             * ****************************************/
-                public Table(int rows, int colomns){
+                public Table(int rows, int columns){
                     this.rows = rows;
-                    this.colomns = colomns;
+                    this.columns = columns;
                 } // end initialized constructor
      
  	// ********** accessors / getters **********
  	
-     //*****************************************************
-    // Purpose: get the id number of the circle
-    // Interface: IN: none
-    // Returns: current state of property id (id number)
-    // *****************************************************          	
- 	// ********** mutators / setters **********
- 
+           /*****************************************************
+            * Purpose: gets rows
+            * Interface: IN: none
+            * Returns: current state of property rows
+            *****************************************************/  
+            public int getRows(){
+                return rows;
+            } // end getRows
+
+            /*****************************************************
+            * Purpose: gets columns
+            * Interface: IN: none
+            * Returns: current state of property rows
+            *****************************************************/  
+            public int getColumns(){
+                return columns;
+            } // end getColumns       	
+ 	
+        // ********** mutators / setters **********
+
+            /*****************************************
+            * Description:  sets rows
+            * Interface: 
+            * @param        rows: int, the number of rows
+            *****************************************/
+            public void setRows(int rows){
+                this.rows = rows;
+            } // end setRows
+
+            /*****************************************
+            * Description:  sets columns
+            * Interface: 
+            * @param        columns: int, the number of columns
+            *****************************************/
+            public void setColumns(int columns){
+                this.columns = columns;
+            } // end setColumns
+                
  }  // end class
