@@ -4,7 +4,7 @@
  * 
  * Assignment:	01 2D Array Exercise
  *
- * Description:	describe the class you are creating
+ * Description:	table class
  *
  * ************************************************************/
  
@@ -15,12 +15,16 @@
  {  // begin class
  	
  	// *********** class constants **********
- 	
+            
+            final int MAXROW = 10;      // max # of rows
+            final int MAXCOL = 10;      // max # of cols
  	
  	// ********** instance variable **********
  	
             int rows = 0;       // number of rows
             int columns = 0;    // number of columns
+            
+            int[][] table = new int[MAXROW][MAXCOL];    // pointer to table
             
  	// ********** constructors ***********
  	
@@ -65,7 +69,29 @@
             *****************************************************/  
             public int getColumns(){
                 return columns;
-            } // end getColumns       	
+            } // end getColumns   
+
+            /*****************************************************
+            * Purpose: gets table
+            * Interface: IN: none
+            * Returns: current state of property table
+            *****************************************************/  
+            public int[][] getTable() {
+                return table;
+            } // end getTable
+            
+            /*****************************************************
+            * Purpose: accesses specific cell in table
+            * Interface:
+            * @param    table[][] : int table
+            * @param    x : int, first index being accessed
+            * @param    y : int, second index being accessed
+            * Returns: an element of the table
+            *****************************************************/  
+            public int getElement(int table[][], int x, int y){
+                int element = this.table[x][y];      // accesses element of table
+                return element;
+            } // end getElement
  	
         // ********** mutators / setters **********
 
@@ -86,5 +112,14 @@
             public void setColumns(int columns){
                 this.columns = columns;
             } // end setColumns
+            
+            /*****************************************
+            * Description:  sets table
+            * Interface: 
+            * @param        table: int, 2D array
+            *****************************************/
+            public void setTable(int[][] table) {
+                this.table = table;
+            } // end setTable
                 
  }  // end class
