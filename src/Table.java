@@ -16,8 +16,8 @@
  	
  	// *********** class constants **********
             
-            final int MAXROW = 10;      // max # of rows
-            final int MAXCOL = 10;      // max # of cols
+            final int MAXROW = 20;      // max # of rows
+            final int MAXCOL = 20;      // max # of cols
  	
  	// ********** instance variable **********
  	
@@ -92,6 +92,61 @@
                 int element = this.table[x][y];      // accesses element of table
                 return element;
             } // end getElement
+            
+            /**********************************************
+            * Description:  formats output of a row
+            * Interface: 
+            * @param        table : int, 2D array
+            * @param        rows : int, the number of rows
+            * @param        row : int, the index of the row being accessed
+            * Returns: a row of the table
+            **********************************************/
+            public String formatRow(int[][] table, int rows, int row) {
+                String r = "";         // a row of the table
+                for(int i = 0; i <= rows; i++){
+                    r += String.format("%d%s", this.table[row][i], ",");
+                } // end for int = 0
+                
+                return r;
+            } // end formatRow
+            
+            /**********************************************
+            * Description:  formats out of a column
+            * Interface: 
+            * @param        table : int, 2D array
+            * @param        columns : int, the number of columns
+            * @param        column : int, the index of the column being accessed
+            * Returns: a row of the table
+            **********************************************/
+            public String formatColumn(int[][] table, int columns, int column) {
+                String c = "";         // a row of the table
+                for(int i = 0; i <= columns; i++){
+                    c += String.format("%d%s", this.table[i][column], ",");
+                } // end for int = 0
+                
+                return c;
+            } // end formatColumn
+            
+            /**********************************************
+            * Description:  formats output of table
+            * Interface: 
+            * @param        table : int, 2D array
+            * @param        columns : int, the number of columns
+            * @param        rows : int, the number of rows
+            * Returns       s : a formatted table
+            **********************************************/
+            public String formatTable(int[][] table, int columns, int rows) {
+                String s = "";         // a row of the table
+                for(int i = 0; i <= rows; i++){
+                    for(int j = 0; j<= columns; j++){
+                        s += String.format("%d%s", this.table[i][j], ",");
+                    } // end for int j = 0
+                    
+                    s += String.format("%s", "\n");
+                } // end for int i = 0
+                
+                return s;
+            } // end formatTable
  	
         // ********** mutators / setters **********
 
