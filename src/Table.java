@@ -99,13 +99,13 @@
             * Interface: 
             * @param        table : int, 2D array
             * @param        rows : int, the number of rows
-            * @param        row : int, the index of the row being accessed
+            * @param        index : int, the index of the row being accessed
             * Returns: a row of the table
             **********************************************/
-            public String formatRow(int[][] table, int rows, int row) {
+            public String formatRow(int[][] table, int rows, int index) {
                 String r = "";         // a row of the table
                 for(int i = 0; i <= rows; i++){
-                    r += String.format("%d%s", this.table[row][i], ",");
+                    r += String.format("%d%s", this.table[index][i], ",");
                 } // end for int = 0
                 
                 return r;
@@ -116,13 +116,13 @@
             * Interface: 
             * @param        table : int, 2D array
             * @param        columns : int, the number of columns
-            * @param        column : int, the index of the column being accessed
+            * @param        index : int, the index of the column being accessed
             * Returns: a row of the table
             **********************************************/
-            public String formatColumn(int[][] table, int columns, int column) {
+            public String formatColumn(int[][] table, int columns, int index) {
                 String c = "";         // a row of the table
                 for(int i = 0; i <= columns; i++){
-                    c += String.format("%d%s", this.table[i][column], ",");
+                    c += String.format("%d%s", this.table[i][index], ",");
                 } // end for int = 0
                 
                 return c;
@@ -177,6 +177,45 @@
                 
                 return s;
             } // end formatTable
+            
+        /**********************************************
+            * Description:  gets the sum of the table
+            * Interface: 
+            * @param        table : int, 2D array
+            * @param        columns : int, the number of columns
+            * @param        rows : int, the number of rows
+            * Returns: a row of the table
+            **********************************************/
+            public int getSumTable(int[][] table, int columns, int rows) {
+                int sum = 0;         // the sum of the table
+                for(int i = 0; i <= rows; i++){
+                    for(int j = 0; j<= columns; j++){
+                        sum += this.table[i][j];
+                    } // end for int j = 0
+                } // end for int i = 0    
+                
+                return sum;
+            } // end getSumTable
+            
+        /**********************************************
+            * Description:  gets the average of the table
+            * Interface: 
+            * @param        table : int, 2D array
+            * @param        columns : int, the number of columns
+            * @param        rows : int, the number of rows
+            * Returns: a row of the table
+            **********************************************/
+            public int getAverageTable(int[][] table, int columns, int rows) {
+                int sum = 0;        // the sum of the table
+                int average = 0;    // the average of the table
+                for(int i = 0; i <= rows; i++){
+                    for(int j = 0; j<= columns; j++){
+                        sum += this.table[i][j];
+                    } // end for int j = 0
+                } // end for int i = 0    
+                average = sum / (columns * rows);   // calculates average (CURRENTLY INCORRECT BECAUSE OF EXTRA ZEROS)
+                return average;
+            } // end getSumTable        
  	
         // ********** mutators / setters **********
 
