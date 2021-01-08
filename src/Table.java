@@ -46,7 +46,8 @@
             * @param        columns : int, number of columns
             * 
             * ****************************************/
-                public Table(int rows, int columns){
+                public Table(int[][] table, int rows, int columns){
+                    this.table = table;
                     this.rows = rows;
                     this.columns = columns;
                 } // end initialized constructor
@@ -133,17 +134,46 @@
             * @param        table : int, 2D array
             * @param        columns : int, the number of columns
             * @param        rows : int, the number of rows
+            * @param        rowDirection : char, 'f' for forward or 'r' for reverse
+            * @param        columnDirection : char, 'f' for forward or 'r' for reverse
             * Returns       s : a formatted table
             **********************************************/
-            public String formatTable(int[][] table, int columns, int rows) {
+            public String formatTable(int[][] table, int columns, int rows, char rowDirection, char columnDirection) {
                 String s = "";         // a row of the table
-                for(int i = 0; i <= rows; i++){
-                    for(int j = 0; j<= columns; j++){
-                        s += String.format("%d%s", this.table[i][j], ",");
-                    } // end for int j = 0
+                if(columnDirection == 'f'){
+                    for(int i = 0; i <= rows; i++){
+                        if(rowDirection == 'f'){
+                            for(int j = 0; j<= columns; j++){
+                                s += String.format("%d%s", this.table[i][j], ",");
+                            } // end for int j = 0
+                        } // end if columnDirection = 'f'
+                        else{
+                            for(int k = columns; k>= 0; k--){
+                                s += String.format("%d%s", this.table[i][k], ",");
+                            } // end for int k = 0
+                        
+                        } // end else rowDirection = 'r'
                     
                     s += String.format("%s", "\n");
-                } // end for int i = 0
+                    } // end for int i = 0
+                } // end if columnDirection = 'f'
+                else{
+                    for(int m = rows; m >= 0; m--){
+                        if(rowDirection == 'f'){
+                            for(int g = 0; g <= columns; g ++){
+                                s += String.format("%d%s", this.table[m][g], ",");
+                            } // end for int g = 0
+                        } // end if columnDirection = 'f'
+                        else{
+                            for(int p = columns; p >= 0; p --){
+                                s += String.format("%d%s", this.table[m][p], ",");
+                        } // end for int j = 0
+                        
+                        } // end else rowDirection = 'r'
+                    
+                        s += String.format("%s", "\n");
+                        } // end for int m = 0
+                    } // end else columnDirection = 'r'
                 
                 return s;
             } // end formatTable
