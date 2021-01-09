@@ -18,6 +18,7 @@
 import javax.swing.*;
 import java.text.DecimalFormat;
  import java.io.*;
+import java.util.ArrayList;
 
 public class TableClient
 {  // begin class
@@ -26,8 +27,8 @@ public class TableClient
             
 	// ***** declaration of constants *****
 	
-            final int MAXROW = 10;      // max # of rows
-            final int MAXCOL = 10;      // max # of cols
+            final int MAXROW = 20;      // max # of rows
+            final int MAXCOL = 20;      // max # of cols
         
 	// ***** declaration of variables *****
 	
@@ -45,12 +46,17 @@ public class TableClient
             String tabSpace = "      ";     // six spaces
             String nl = System.lineSeparator();  // universal new line character
             
-            int row = 0;        // index of row
+            int rows = 0;        // number of rows
+            int columns = 0;     // number of columns
+            
+            int row = 0;         // row counter
             
             int[][] table = new int[MAXROW][MAXCOL];    // creates table
             
 	// ***** create objects *****
 		
+            ArrayList<Table> tables = new ArrayList<>();
+            
 	// ***** create input stream *****
 	
             try{
@@ -82,24 +88,47 @@ public class TableClient
 	
             strin = fin.readLine();     // reads first line of text file
             
-            while(strin != null){
+            while(strin != null){               
                 tokens = strin.split(delim);   // splits input
+                columns = Integer.parseInt(tokens[0]);
+                rows = Integer.parseInt(tokens[1]);
+                strin = fin.readLine(); // reads next line of text file
+                row = 0;
+                for(int i = 0; i < rows; i++){
+                    for(int k = 0; k < columns; k ++){
+                        table[row][i] = Integer.parseInt(tokens[k]);
+                        strin = fin.readLine();
+                    } // end for int k = 0
+                    row++;                 // adds one to the index of row
                 
-                for(int i = 0; i < tokens.length; i++){
-                    table[row][i] = Integer.parseInt(tokens[i]);
+                    strin = fin.readLine(); // reads next line of text file
                 } // for for loop
                 
-                row++;                  // increases row index by one
+                tables.add(new Table(table, rows, columns));   // uses initialized constructor to create table
                 
                 strin = fin.readLine(); // reads next line of text file
             } // end EOF loop
-        
+               
+            
 	// ***** processing *****
 	
 		
 	// ***** output *****
 	
-            // all formatted ouput is printed in this section
+            System.out.println("Printing table:");
+            System.out.println(table1.formatTable(table, columns, rows, 'f', 'f'));
+            
+            System.out.println("Printing table in reverse:");
+            System.out.println(table1.formatTable(table, columns, rows, 'r', 'r'));
+            
+            System.out.println("Printing table with columns in reverse:");
+            System.out.println(table1.formatTable(table, columns, rows, 'f', 'r'));
+            
+            System.out.println("Printing table with rows in reverse:");
+            System.out.println(table1.formatTable(table, columns, rows, 'r', 'f'));
+            
+            System.out.println("The sum of the table is " + table1.sumTable(table, columns, rows) + ".");
+            System.out.println("The average of the table is " + table1.averageTable(table, columns, rows) + ".");        
 
 	// ***** closing message *****
 	
