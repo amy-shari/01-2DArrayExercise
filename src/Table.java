@@ -16,35 +16,17 @@
  	
  	// *********** class constants **********
             
-            final int MAXROW = 20;      // max # of rows
-            final int MAXCOL = 20;      // max # of cols
+            private static final int MAXROW = 20;      // max # of rows
+            private static final int MAXCOL = 20;      // max # of cols
  	
  	// ********** instance variable **********
  	
-            int rows = 0;                      // number of rows
-            int[] row = new int[MAXCOL];       // number of elements in a row (# of columns)
+            private int rows = 0;                      // number of rows
+            private int columns = 0;       // number of elements in a row (# of columns)
             
-            int[][] table = new int[MAXROW][MAXCOL];    // pointer to table
+            private int[][] table = new int[MAXROW][MAXCOL];    // pointer to table
             
  	// ********** constructors ***********
- 	
-            /*****************************************
-            * Description: default constructor
-            * 
-            * ****************************************/
-                public Table(){
-                    this.rows = 0;        // sets rows to zero
-                    
-                    for(int i = 0; i <= row.length; i++){
-                        this.row[i] = 0;     // sets number of elements in a row to zero
-                    } // end for int i =0
-                    
-                    for(int j = 0; j <= table.length; j++){
-                        for(int k = 0; k <= row.length; k++){
-                            this.table[j][k]= 0;    // sets table elements to zero
-                        } // end for int k = 0
-                    } // end for int j = 0
-                }  // end default constructor
             
             /*****************************************
             * Description: initialized constructor
@@ -52,13 +34,13 @@
             * Interface:
             * 
             * @param        rows : int, number of rows
-            * @param        row : int[], number of columns in each row
+            * @param        columns : int, number of columns
             * 
             * ****************************************/
-                public Table(int[][] table, int rows, int[] row){
+                public Table(int[][] table, int rows, int columns){
                     this.table = table;
                     this.rows = rows;
-                    this.row = row;
+                    this.columns = columns;
                 } // end initialized constructor
      
  	// ********** accessors / getters **********
@@ -73,12 +55,12 @@
             } // end getRows
 
             /*****************************************************
-            * Purpose: gets number of elements in a row
+            * Purpose: gets number of columns
             * Interface: IN: none
-            * Returns: current state of property row
+            * Returns: current state of property columns
             *****************************************************/  
-            public int[] getRow(){
-                return row;
+            public int getColumns(){
+                return columns;
             } // end getColumns   
 
             /*****************************************************
@@ -93,12 +75,11 @@
             /*****************************************************
             * Purpose: accesses specific cell in table
             * Interface:
-            * @param    table[][] : int table
             * @param    x : int, first index being accessed
             * @param    y : int, second index being accessed
             * Returns: an element of the table
             *****************************************************/  
-            public int getElement(int table[][], int x, int y){
+            public int getElement(int x, int y){
                 int element = this.table[x][y];      // accesses element of table
                 return element;
             } // end getElement
@@ -111,10 +92,10 @@
             * @param        index : int, the index of the row being accessed
             * Returns: a row of the table
             **********************************************/
-            public String formatRow(int[][] table, int rows, int index) {
+            public String formatRow(int rows, int index) {
                 String r = "";         // a row of the table
                 for(int i = 0; i <= rows; i++){
-                    r += String.format("%d%s", this.table[index][i], ",");
+                    r += String.format("%d%s", this.getElement(index, i), ",");
                 } // end for int = 0
                 
                 return r;
@@ -123,15 +104,13 @@
             /**********************************************
             * Description:  formats out of a column
             * Interface: 
-            * @param        table : int, 2D array
-            * @param        row : int[], the number of columns in each row
             * @param        index : int, the index of the column being accessed
             * Returns: a row of the table
             **********************************************/
-            public String formatColumn(int[][] table, int[] row, int index) {
+            public String formatColumn(int index) {
                 String c = "";         // a row of the table
-                for(int i = 0; i <= row[index]; i++){
-                    c += String.format("%d%s", this.table[i][index], ",");
+                for(int i = 0; i <= this.getColumns(); i++){
+                    c += String.format("%d%s", this.getElement(index, i), ",");
                 } // end for int = 0
                 
                 return c;
@@ -140,25 +119,23 @@
             /**********************************************
             * Description:  formats output of table
             * Interface: 
-            * @param        table : int, 2D array
-            * @param        row : int[], the number of columns in a row
-            * @param        rows : int, the number of rows
             * @param        rowDirection : char, 'f' for forward or 'r' for reverse
             * @param        columnDirection : char, 'f' for forward or 'r' for reverse
             * Returns       s : a formatted table
             **********************************************/
-            public String formatTable(int[][] table, int[] row, int rows, char rowDirection, char columnDirection) {
+            public String formatTable(char rowDirection, char columnDirection) {
                 String s = "";         // a row of the table
                 if(columnDirection == 'f'){
-                    for(int i = 0; i <= rows; i++){
+                    for(int i = 0; i <= this.getRows(); i++){
                         if(rowDirection == 'f'){
-                            for(int j = 0; j<= row[i]; j++){
+                            for(int j = 0; j <= this.getColumns(); j++){
                                 s += String.format("%d%s", this.table[i][j], ",");
+                                //System.out.println("Printing table elemnent: " + this.table[0][1]);
                             } // end for int j = 0
                         } // end if columnDirection = 'f'
                         else{
-                            for(int k = row[i]; k>= 0; k--){
-                                s += String.format("%d%s", this.table[i][k], ",");
+                            for(int k = this.getColumns(); k >= 0; k--){
+                                s += String.format("%d%s", this.getElement(i,k), ",");
                             } // end for int k = 0
                         
                         } // end else rowDirection = 'r'
@@ -167,15 +144,15 @@
                     } // end for int i = 0
                 } // end if columnDirection = 'f'
                 else{
-                    for(int m = rows; m >= 0; m--){
+                    for(int m = this.getRows(); m >= 0; m--){
                         if(rowDirection == 'f'){
-                            for(int g = 0; g <= row[m]; g ++){
-                                s += String.format("%d%s", this.table[m][g], ",");
+                            for(int g = 0; g < this.getColumns(); g ++){
+                                s += String.format("%d%s", this.getElement(m,g), ",");
                             } // end for int g = 0
                         } // end if columnDirection = 'f'
                         else{
-                            for(int p = row[m]; p >= 0; p --){
-                                s += String.format("%d%s", this.table[m][p], ",");
+                            for(int p = this.getColumns(); p >= 0; p --){
+                                s += String.format("%d%s", this.getElement(m,p), ",");
                         } // end for int j = 0
                         
                         } // end else rowDirection = 'r'
@@ -190,16 +167,14 @@
         /**********************************************
             * Description:  gets the sum of the table
             * Interface: 
-            * @param        table : int, 2D array
-            * @param        columns : int, the number of columns
-            * @param        rows : int, the number of rows
+
             * Returns: a row of the table
             **********************************************/
-            public int sumTable(int[][] table, int[] row, int rows) {
+            public int sumTable() {
                 int sum = 0;         // the sum of the table
-                for(int i = 0; i <= rows; i++){
-                    for(int j = 0; j<= row[i]; j++){
-                        sum += this.table[i][j];
+                for(int i = 0; i <= this.getRows(); i++){
+                    for(int j = 0; j<= this.getColumns(); j++){
+                        sum += this.getElement(i, j);
                     } // end for int j = 0
                 } // end for int i = 0    
                 
@@ -209,24 +184,21 @@
         /**********************************************
             * Description:  gets the average of the table
             * Interface: 
-            * @param        table : int, 2D array
-            * @param        row : int[], the number of columns per row
-            * @param        rows : int, the number of rows
             * Returns: a row of the table
             **********************************************/
-            public int averageTable(int[][] table, int[] row, int rows) {
+            public int averageTable() {
                 int sum = 0;        // the sum of the table
                 int average = 0;    // the average of the table
                 int elements = 0;   // the number of elements in the table
                 
-                for(int i = 0; i <= rows; i++){
-                    for(int j = 0; j<= row[i]; j++){
-                        sum += this.table[i][j];
+                for(int i = 0; i <= this.getRows(); i++){
+                    for(int j = 0; j<= this.getColumns(); j++){
+                        sum += this.getElement(i, j);
                     } // end for int j = 0
                 } // end for int i = 0    
                 
-                for(int k = 0; k <= row.length - 1; k++){
-                    elements += row[k];     // finds total number of elements
+                for(int k = 0; k <= this.getColumns() - 1; k++){
+                    elements += this.getColumns();     // finds total number of elements
                 } // end for int k = 0
                 
                 average = sum / elements;   // calculates average
@@ -249,8 +221,8 @@
             * Interface: 
             * @param        row: int[], the number of elements per row
             *****************************************/
-            public void setRow(int[] row){
-                this.row = row;
+            public void setRow(int columns){
+                this.columns = columns;
             } // end setRow
             
             /*****************************************
