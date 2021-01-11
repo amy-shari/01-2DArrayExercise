@@ -90,21 +90,18 @@ public class TableClient
             
             while(strin != null){               
                 tokens = strin.split(delim);   // splits input
-                columns = Integer.parseInt(tokens[0]);
-                rows = Integer.parseInt(tokens[1]);
-                strin = fin.readLine(); // reads next line of text file
-                row = 0;
+                columns = Integer.parseInt(tokens[1]);
+                rows = Integer.parseInt(tokens[0]);
+
                 for(int i = 0; i < rows; i++){
-                    for(int k = 0; k < columns; k ++){
-                        table[row][i] = Integer.parseInt(tokens[k]);
-                        strin = fin.readLine();
-                    } // end for int k = 0
-                    row++;                 // adds one to the index of row
-                
                     strin = fin.readLine(); // reads next line of text file
+                    tokens = strin.split(delim);   // splits input
+                    for(int k = 0; k < columns; k ++){
+                        table[i][k] = Integer.parseInt(tokens[k]);
+                    } // end for int k = 0
                 } // for for loop
-                
                 tables.add(new Table(table, rows, columns));   // uses initialized constructor to create table
+                //System.out.println(tables.get(0).formatTable('f', 'f'));
                 
                 strin = fin.readLine(); // reads next line of text file
             } // end EOF loop
@@ -114,22 +111,25 @@ public class TableClient
 	
 		
 	// ***** output *****
-	
+        
+            /* for(int j = 0; j < tables.size(); j++){
             System.out.println("Printing table:");
-            System.out.println(table1.formatTable(table, columns, rows, 'f', 'f'));
+            System.out.println(tables.get(j).formatTable('f', 'f'));
             
             System.out.println("Printing table in reverse:");
-            System.out.println(table1.formatTable(table, columns, rows, 'r', 'r'));
+            System.out.println(tables.get(j).formatTable('r', 'r'));
             
             System.out.println("Printing table with columns in reverse:");
-            System.out.println(table1.formatTable(table, columns, rows, 'f', 'r'));
+            System.out.println(tables.get(j).formatTable('f', 'r'));
             
             System.out.println("Printing table with rows in reverse:");
-            System.out.println(table1.formatTable(table, columns, rows, 'r', 'f'));
+            System.out.println(tables.get(j).formatTable('r', 'f'));
             
-            System.out.println("The sum of the table is " + table1.sumTable(table, columns, rows) + ".");
-            System.out.println("The average of the table is " + table1.averageTable(table, columns, rows) + ".");        
-
+            System.out.println("The sum of the table is " + tables.get(j).sumTable() + ".");
+            System.out.println("The average of the table is " + tables.get(j).averageTable() + ".");        
+            } // end for int j = 0
+*/
+            
 	// ***** closing message *****
 	
             System.out.println("end of processing");
