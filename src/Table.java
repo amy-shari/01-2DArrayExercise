@@ -248,5 +248,6 @@ public class Table
             public void setTable(int[][] table) {
                 this.table = table;
             } // end setTable
+
                 
  }  // end class
