@@ -24,7 +24,8 @@
             private int rows = 0;                      // number of rows
             private int columns = 0;       // number of elements in a row (# of columns)
             
-            private int[][] table = new int[MAXROW][MAXCOL];    // pointer to table
+            //private int[][] table = new int[MAXROW][MAXCOL];    // pointer to table
+            private int[][] table = null;    // pointer to table
             
  	// ********** constructors ***********
             
@@ -35,9 +36,10 @@
             * 
             * @param        rows : int, number of rows
             * @param        columns : int, number of columns
-            * 
+            * @param        table : int{}{}, 2D array
             * ****************************************/
                 public Table(int[][] table, int rows, int columns){
+                    this.table = new int[rows][columns];
                     this.table = table;
                     this.rows = rows;
                     this.columns = columns;
@@ -86,13 +88,12 @@
             
             /**********************************************
             * Description:  formats output of a row
-            * Interface: 
-            * @param        table : int, 2D array
+            * Interface:
             * @param        rows : int, the number of rows
             * @param        index : int, the index of the row being accessed
             * Returns: a row of the table
             **********************************************/
-            public String formatRow(int rows, int index) {
+            public String formatRow( int rows, int index) {
                 String r = "";         // a row of the table
                 for(int i = 0; i <= rows; i++){
                     r += String.format("%d%s", this.getElement(index, i), ",");
@@ -126,15 +127,15 @@
             public String formatTable(char rowDirection, char columnDirection) {
                 String s = "";         // a row of the table
                 if(columnDirection == 'f'){
-                    for(int i = 0; i <= this.getRows(); i++){
+                    for(int i = 0; i < this.getRows(); i++){
                         if(rowDirection == 'f'){
-                            for(int j = 0; j <= this.getColumns(); j++){
+                            for(int j = 0; j < this.getColumns(); j++){
                                 s += String.format("%d%s", this.table[i][j], ",");
-                                //System.out.println("Printing table elemnent: " + this.table[0][1]);
+                                //System.out.println("Printing table element: " + this.table[0][1]);
                             } // end for int j = 0
                         } // end if columnDirection = 'f'
                         else{
-                            for(int k = this.getColumns(); k >= 0; k--){
+                            for(int k = this.getColumns(); k > 0; k--){
                                 s += String.format("%d%s", this.getElement(i,k), ",");
                             } // end for int k = 0
                         
@@ -144,14 +145,14 @@
                     } // end for int i = 0
                 } // end if columnDirection = 'f'
                 else{
-                    for(int m = this.getRows(); m >= 0; m--){
+                    for(int m = this.getRows(); m > 0; m--){
                         if(rowDirection == 'f'){
                             for(int g = 0; g < this.getColumns(); g ++){
                                 s += String.format("%d%s", this.getElement(m,g), ",");
                             } // end for int g = 0
                         } // end if columnDirection = 'f'
                         else{
-                            for(int p = this.getColumns(); p >= 0; p --){
+                            for(int p = this.getColumns(); p > 0; p --){
                                 s += String.format("%d%s", this.getElement(m,p), ",");
                         } // end for int j = 0
                         
@@ -163,7 +164,19 @@
                 
                 return s;
             } // end formatTable
-            
+
+
+            public String printTable() {
+                String s = "";
+                for (int i = 0; i < rows; i++) {
+                    for (int j = 0; j < columns; j++) {
+                        s+= table[i][j] + " ";
+                    }
+                    s += "\n";
+                }
+                return s;
+            } // end toString override
+
         /**********************************************
             * Description:  gets the sum of the table
             * Interface: 
@@ -219,7 +232,7 @@
             /*****************************************
             * Description:  sets columns
             * Interface: 
-            * @param        row: int[], the number of elements per row
+            * @param        columns: int[], the number of elements per row
             *****************************************/
             public void setRow(int columns){
                 this.columns = columns;
@@ -233,5 +246,6 @@
             public void setTable(int[][] table) {
                 this.table = table;
             } // end setTable
+
                 
  }  // end class
