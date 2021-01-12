@@ -100,18 +100,36 @@ public class TableClient
                         table[i][k] = Integer.parseInt(tokens[k]);
                     } // end for int k = 0
                 } // for for loop
-                tables.add(new Table(table, rows, columns));   // uses initialized constructor to create table
-                //System.out.println(tables.get(0).formatTable('f', 'f'));
-                
+
+                /*for (int i = 0; i < rows; i++) {
+                    for (int j = 0; j < columns; j++) {
+                        System.out.print(table[i][j] + " ");
+                    }
+                    System.out.println();
+                } */
+
+                Table t = new Table(table, rows, columns);
+                //System.out.println(t.printTable());
+                tables.add(t);   // uses initialized constructor to create table
+                System.out.println(tables.get(0).printTable());
+
                 strin = fin.readLine(); // reads next line of text file
             } // end EOF loop
-               
-            
+
+            //System.out.println(tables.get(0).printTable());
+
+
+
+
 	// ***** processing *****
 	
 		
 	// ***** output *****
         
+            //System.out.println(tables.get(0).formatTable('f','f'));
+            //System.out.println(tables.get(1).formatTable('f','f'));
+            //System.out.println(tables.get(2).formatTable('f','f'));
+            
             /* for(int j = 0; j < tables.size(); j++){
             System.out.println("Printing table:");
             System.out.println(tables.get(j).formatTable('f', 'f'));
