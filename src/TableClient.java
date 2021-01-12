@@ -110,13 +110,27 @@ public class TableClient
 
                 Table t = new Table(table, rows, columns);
                 //System.out.println(t.printTable());
+		    
+	/* so, if I remember correctly, the preceding line (111 and 112) worked as expected
+	it's the next line where the table seeems to get messed up?
+	*/
                 tables.add(t);   // uses initialized constructor to create table
+
+		    
                 System.out.println(tables.get(0).printTable());
+		    //try this
+		System.out.prinlnt(t);			// invoke the toString() method on t
+		System.out.println(tables.get(0);	// invoke the toString() method on tables(0)
 
                 strin = fin.readLine(); // reads next line of text file
             } // end EOF loop
 
+// what happens if you uncomment the following line?
             //System.out.println(tables.get(0).printTable());
+		
+// try this
+		System.out.println(tables);  // this invokes the built in toString() method in the arraylsit the output might seem a bit 
+						// confusing at first but have a close look at it to see if it matches what is supposed to print
 
 
 
